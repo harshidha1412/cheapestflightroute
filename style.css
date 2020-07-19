@@ -1,0 +1,45 @@
+body {
+  
+  margin: 0px;
+  padding: 0px;
+  background-image: url(bg.png);
+  background-position: center;
+  background-size: cover;
+
+}
+.navbar{
+    background-color: #2f2626!important;
+}
+/*.dropdown-menu-center {
+    right: auto;
+    left: 50%;
+    text-align: center;
+    -webkit-transform: translate(-50%, 0);
+    -o-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    
+    
+*/
+.mar{
+    margin: 20px;
+    margin-right: 20px;
+
+}
+
+.bg{
+    background-image: url("https://blog-content.ixigo.com/wp-content/uploads/2019/12/A-Flight-to-the-Mountains-8-Hill-Stations-with-Airports-in-India.jpeg");
+}
+.maps{
+    pointer-events: none;
+    overflow: hidden;
+    display: inline-block;
+}
+.font{
+	font-size: 1.3rem;
+}
+img{
+	transition: all 1s;
+}
+img:hover{
+	transform: scale(1.2);
+}

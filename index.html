@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cheapest Flight Fare</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</head>
+<body >
+	<nav class="navbar">
+  <a class="navbar-brand" href="#">
+    <img src="https://toppng.com/public/uploads/preview/flight-logo-11549898075cfemskecyq.png" width="45" height="45" alt="" loading="lazy">
+  </a>
+</nav>
+
+<br><br>
+<center>
+   <div >
+   <select id="from" class="btn-secondary font">
+			<option value="None" disabled selected>From</option>
+			<option value="Ahmedabad">Ahmedabad</option>
+			<option value="Amritsar">Amritsar</option>
+			<option value="Bangalore">Bangalore</option>
+			<option value="Calcutta">Calcutta</option>
+			<option value="Chennai">Chennai</option>
+			<option value="Hyderabad">Hyderabad</option>
+			<option value="Kochi">Kochi</option>
+			<option value="Lucknow">Lucknow</option>
+			<option value="Madurai">Madurai</option>
+			<option value="Mumbai">Mumbai</option>
+			<option value="New Delhi">New Delhi</option>
+			<option value="Vishakapatnam">Vishakapatnam</option>
+			
+		</select></div>
+ 	<br>
+ 	<div class="title" >
+   <select id="destination" class="btn-secondary font">
+			<option value="None" disabled selected>Destination</option>
+			<option value="Ahmedabad">Ahmedabad</option>
+			<option value="Amritsar">Amritsar</option>
+			<option value="Bangalore">Bangalore</option>
+			<option value="Calcutta">Calcutta</option>
+			<option value="Chennai">Chennai</option>
+			<option value="Hyderabad">Hyderabad</option>
+			<option value="Kochi">Kochi</option>
+			<option value="Lucknow">Lucknow</option>
+			<option value="Madurai">Madurai</option>
+			<option value="Mumbai">Mumbai</option>
+			<option value="New Delhi">New Delhi</option>
+			<option value="Vishakapatnam">Vishakapatnam</option>
+			
+		</select></div>
+  	<br><br>
+   <button type="button" class="btn-danger space" onclick="solve()">Find the cheapest fare</button>
+   <button type="button" class="btn-danger space" onclick="solve1()">Find the shortest path</button>
+
+	<p id="result"></p>
+	<br><br>
+	<div style="height:400px; width:100%; display:inline-block; overflow:hidden;">
+	<iframe class="maps" src="https://www.google.com/maps/d/embed?mid=1LEBxnmJ6yUB0tXkp7HCVSrgTfUxFpnoK&hl=en" width="640" height="480" frameborder="0" style="position: relative;border:none;top:-50px;"></iframe></div>
+	   </center>
+</body>
+</html>
+<script type="text/javascript">
+
+
+function solve() {
+
+	var graph={
+		"Ahmedabad":{
+			"Amritsar":5200,
+			"Bangalore":2900,
+			"Calcutta":8300,
+			"Chennai":5800,
+			"Hyderabad":6750,
+			"Kochi":8000,
+			"Lucknow":9000,
+			"Madurai":7200,
+			"Mumbai":2000,
+			"New Delhi":5000,
+			"Vishakapatnam":6820
+			},
+		"Amritsar":{
+			"Ahmedabad":5200,
+			"Bangalore":4700,
+			"Calcutta":3000,
+			"Chennai":6800,
+			"Hyderabad":4000,
+			"Kochi":7300,
+			"Lucknow":5540,
+			"Madurai":7000,
+			"Mumbai":3200,
+			"New Delhi":2800,
+			"Vishakapatnam":6000
+			},
+		"Bangalore":{
+			"Ahmedabad":2900,
+			"Amritsar":4700,
+			"Calcutta":6700,
+			"Chennai":3300,
+			"Hyderabad":2500,
+			"Kochi":4500,
+			"Lucknow":5600,
+			"Madurai":5500,
+			"Mumbai":7800,
+			"New Delhi":8400,
+			"Vishakapatnam":3400
+			},
+		"Calcutta":{
+			"Ahmedabad":8300,
+			"Amritsar":3000,
+			"Bangalore":6700,
+			"Chennai":7880,
+			"Hyderabad":7400,
+			"Kochi":9300,
+			"Lucknow":6300,
+			"Madurai":9400,
+			"Mumbai":5250,
+			"New Delhi":6400,
+			"Vishakapatnam":3500
+			},
+		"Chennai":{
+			"Ahmedabad":5800,
+			"Amritsar":6800,
+			"Calcutta":7880,
+			"Bangalore":3300,
+			"Hyderabad":2200,
+			"Kochi":4580,
+			"Lucknow":3900,
+			"Madurai":2300,
+			"Mumbai":8450,
+			"New Delhi":9200,
+			"Vishakapatnam":3780
+			},
+		"Hyderabad":{
+			"Ahmedabad":6750,
+			"Amritsar":4000,
+			"Calcutta":7400,
+			"Chennai":5800,
+			"Bangalore":2500,
+			"Kochi":3980,
+			"Lucknow":4200,
+			"Madurai":4900,
+			"Mumbai":5700,
+			"New Delhi":8500,
+			"Vishakapatnam":2100
+			},
+		"Kochi":{
+			"Ahmedabad":8000,
+			"Amritsar":7300,
+			"Calcutta":9300,
+			"Chennai":4580,
+			"Bangalore":4500,
+			"Hyderabad":3980,
+			"Lucknow":4670,
+			"Madurai":3880,
+			"Mumbai":4560,
+			"New Delhi":9750,
+			"Vishakapatnam":5300 
+			},
+		"Lucknow":{
+			"Ahmedabad":9000,
+			"Amritsar":5540, 
+			"Calcutta":6300, 
+			"Chennai":3900,
+			"Bangalore":5600,
+			"Hyderabad":4200,
+			"Kochi":4670,
+			"Madurai":6840,
+			"Mumbai":5900,
+			"New Delhi":9270,
+			"Vishakapatnam":3440
+			},
+		"Madurai":{
+			"Ahmedabad":7200,
+			"Amritsar":7000,
+			"Calcutta":9400,
+			"Chennai":2300,
+			"Bangalore":5500,
+			"Hyderabad":4900,
+			"Kochi":3880,
+			"Lucknow":6840,
+			"Mumbai":6430,
+			"New Delhi":7580,
+			"Vishakapatnam":4940
+			},
+		"Mumbai":{
+			"Ahmedabad":2000,
+			"Amritsar":3200,
+			"Calcutta":5250,
+			"Chennai":8450,
+			"Bangalore":7800,
+			"Hyderabad":5700,
+			"Kochi":4560,
+			"Lucknow":5900,
+			"Madurai":6430,
+			"New Delhi":4830,
+			"Vishakapatnam":4330
+			},
+		"New Delhi":{
+			"Ahmedabad":5000,
+			"Amritsar":2800,
+			"Calcutta":6400,
+			"Chennai":9200,
+			"Bangalore":8400,
+			"Hyderabad":8500,
+			"Kochi":9750,
+			"Lucknow":9270,
+			"Madurai":7580,
+			"Mumbai":4830,
+			"Vishakapatnam":6930
+			},
+		"Vishakapatnam":{
+			"Ahmedabad":6820,
+			"Amritsar":6000,
+			"Calcutta":3500,
+			"Chennai":3780,
+			"Bangalore":3400,
+			"Hyderabad":2100,
+			"Kochi":5300,
+			"Lucknow":3440,
+			"Madurai":4940,
+			"Mumbai":4330,
+			"New Delhi":6930
+			}
+
+
+	};
+
+	var e = document.getElementById("from");
+	var curr=e.options[e.selectedIndex].value;
+	var f = document.getElementById("destination");
+	var dest= f.options[f.selectedIndex].value;
+
+	var s=curr;
+	var start= s;
+
+  var solutions = {};
+  solutions[s] = [];
+  solutions[s].dist = 0;
+  
+  while(true) {
+    var parent = null;
+    var nearest = null;
+    var dist = Infinity;
+    
+
+    for(var n in solutions) {
+            var adj = graph[n];
+            for(var a in adj) {
+                if(solutions[a])
+                    continue;
+                var len = adj[a];
+                if(len < dist) {
+                    parent = solutions[n];
+                    nearest = a;
+                    dist = len;
+                }
+            }
+        }
+
+    if(dist === Infinity) {
+        break;
+    }
+
+    solutions[nearest] = parent.concat(nearest);
+    solutions[nearest].dist = parent.dist + dist;
+  }
+
+		if((dest.localeCompare("None")==0) || (start.localeCompare("None")==0))
+		{
+		document.getElementById("result").innerHTML = "<br><b>Invalid Input</b>";
+		}
+
+		else if(dest.localeCompare(curr)==0)
+		{
+		document.getElementById("result").innerHTML = "<br><b>Your From and Destination are the same!</b>";
+		}
+
+		else
+		{		s=dest;
+    			document.getElementById("result").innerHTML = "<br>The Cheapest flight route from "+start+" to "+dest+" is  <br> <b>" + start + "->" + solutions[s].join("->") + " </b><br>( Total Flight fare: Rs." + solutions[s].dist+") <br><br> ";
+		}
+    return solutions;
+}
+function solve1() {
+
+	var graph={
+		"Ahmedabad":{
+			"Amritsar":430,
+			"Bangalore":290,
+			"Calcutta":800,
+			"Chennai":580,
+			"Hyderabad":620,
+			"Kochi":840,
+			"Lucknow":700,
+			"Madurai":750,
+			"Mumbai":200,
+			"New Delhi":405,
+			"Vishakapatnam":640
+			},
+		"Amritsar":{
+			"Ahmedabad":560,
+			"Bangalore":200,
+			"Calcutta":800,
+			"Chennai":540,
+			"Hyderabad":800,
+			"Kochi":450,
+			"Lucknow":390,
+			"Madurai":740,
+			"Mumbai":645,
+			"New Delhi":560,
+			"Vishakapatnam":870
+			},
+		"Bangalore":{
+			"Ahmedabad":450,
+			"Amritsar":240,
+			"Calcutta":840,
+			"Chennai":586,
+			"Hyderabad":250,
+			"Kochi":850,
+			"Lucknow":960,
+			"Madurai":740,
+			"Mumbai":280,
+			"New Delhi":590,
+			"Vishakapatnam":100
+			},
+		"Calcutta":{
+			"Ahmedabad":496,
+			"Amritsar":340,
+			"Bangalore":850,
+			"Chennai":480,
+			"Hyderabad":656,
+			"Kochi":500,
+			"Lucknow":989,
+			"Madurai":734,
+			"Mumbai":245,
+			"New Delhi":560,
+			"Vishakapatnam":650
+			},
+		"Chennai":{
+			"Ahmedabad":530,
+			"Amritsar":480,
+			"Calcutta":840,
+			"Bangalore":800,
+			"Hyderabad":300,
+			"Kochi":456,
+			"Lucknow":670,
+			"Madurai":786,
+			"Mumbai":700,
+			"New Delhi":987,
+			"Vishakapatnam":340
+			},
+		"Hyderabad":{
+			"Ahmedabad":560,
+			"Amritsar":250,
+			"Calcutta":809,
+			"Chennai":509,
+			"Bangalore":608,
+			"Kochi":805,
+			"Lucknow":904,
+			"Madurai":724,
+			"Mumbai":206,
+			"New Delhi":540,
+			"Vishakapatnam":687
+			},
+		"Kochi":{
+			"Ahmedabad":555,
+			"Amritsar":450,
+			"Calcutta":460,
+			"Chennai":450,
+			"Bangalore":340,
+			"Hyderabad":810,
+			"Lucknow":950,
+			"Madurai":457,
+			"Mumbai":222,
+			"New Delhi":458,
+			"Vishakapatnam":457
+			},
+		"Lucknow":{
+			"Ahmedabad":550,
+			"Amritsar":240,
+			"Calcutta":870,
+			"Chennai":214,
+			"Bangalore":660,
+			"Hyderabad":880,
+			"Kochi":973,
+			"Madurai":756,
+			"Mumbai":220,
+			"New Delhi":549,
+			"Vishakapatnam":666
+			},
+		"Madurai":{
+			"Ahmedabad":524,
+			"Amritsar":293,
+			"Calcutta":890,
+			"Chennai":545,
+			"Bangalore":656,
+			"Hyderabad":874,
+			"Kochi":956,
+			"Lucknow":785,
+			"Mumbai":267,
+			"New Delhi":520,
+			"Vishakapatnam":675
+			},
+		"Mumbai":{
+			"Ahmedabad":527,
+			"Amritsar":296,
+			"Calcutta":834,
+			"Chennai":585,
+			"Bangalore":627,
+			"Hyderabad":830,
+			"Kochi":910,
+			"Lucknow":720,
+			"Madurai":245,
+			"New Delhi":879,
+			"Vishakapatnam":567
+			},
+		"New Delhi":{
+			"Ahmedabad":550,
+			"Amritsar":245,
+			"Calcutta":845,
+			"Chennai":545,
+			"Bangalore":643,
+			"Hyderabad":856,
+			"Kochi":978,
+			"Lucknow":756,
+			"Madurai":230,
+			"Mumbai":567,
+			"Vishakapatnam":321
+			},
+		"Vishakapatnam":{
+			"Ahmedabad":540,
+			"Amritsar":213,
+			"Calcutta":830,
+			"Chennai":543,
+			"Bangalore":620,
+			"Hyderabad":876,
+			"Kochi":976,
+			"Lucknow":750,
+			"Madurai":234,
+			"Mumbai":530,
+			"New Delhi":345
+			}
+
+
+
+
+	};
+
+	var e = document.getElementById("from");
+	var curr=e.options[e.selectedIndex].value;
+	var f = document.getElementById("destination");
+	var dest= f.options[f.selectedIndex].value;
+
+	var s=curr;
+	var start= s;
+
+  var solutions = {};
+  solutions[s] = [];
+  solutions[s].dist = 0;
+  
+  while(true) {
+    var parent = null;
+    var nearest = null;
+    var dist = Infinity;
+    
+
+    for(var n in solutions) {
+            var adj = graph[n];
+            for(var a in adj) {
+                if(solutions[a])
+                    continue;
+                var len = adj[a];
+                if(len < dist) {
+                    parent = solutions[n];
+                    nearest = a;
+                    dist = len;
+                }
+            }
+        }
+
+    if(dist === Infinity) {
+        break;
+    }
+
+    solutions[nearest] = parent.concat(nearest);
+    solutions[nearest].dist = parent.dist + dist;
+  }
+
+		if((dest.localeCompare("None")==0) || (start.localeCompare("None")==0))
+		{
+		document.getElementById("result").innerHTML = "<br><b>Invalid Input</b>";
+		}
+
+		else if(dest.localeCompare(curr)==0)
+		{
+		document.getElementById("result").innerHTML = "<br><b>Your From and Destination are the same!</b>";
+		}
+
+		else
+		{		s=dest;
+    			document.getElementById("result").innerHTML = "<br>The Shortest flight route from "+start+" to "+dest+" is  <br> <b>" + start + "->" + solutions[s].join("->") + " </b><br>( Total distance:" + solutions[s].dist+"km) <br><br> ";
+		}
+    return solutions;
+}
+
+</script>
