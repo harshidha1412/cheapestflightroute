@@ -30,8 +30,7 @@ body {
     background-image: url("https://blog-content.ixigo.com/wp-content/uploads/2019/12/A-Flight-to-the-Mountains-8-Hill-Stations-with-Airports-in-India.jpeg");
 }
 .maps{
-    pointer-events: none;
-    overflow: hidden;
+     overflow: hidden;
     display: inline-block;
 }
 .font{
